@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // Composant qui doit contenir au minimum deux composants => 
 // selector donnant un nom au composant
 @Component({ 
   selector: 'app-root',
-  template: `<h1>Welcome to {{title}}!</h1>`
+  template: `<h1>Welcome on your Pokedex!</h1>,
+             <p>Here's {{ pokemons[1] }}</p>`
 })
-export class AppComponent {
-  title = 'ng-pokedex-angular';
+export class AppComponent implements OnInit {
+  pokemons = ['Rondoudou', 'Noctali', 'Mew'];
+
+  ngOnInit(): void {
+    console.table(this.pokemons);
+  }
 }
