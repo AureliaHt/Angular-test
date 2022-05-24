@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { POKEMONS } from './mock-pokemon-list';
+import { Pokemon } from './pokemon';
 
 // Composant qui doit contenir au minimum deux composants => 
 // selector donnant un nom au composant
 @Component({ 
   selector: 'app-root',
   template: `<h1>Welcome on your Pokedex !</h1>
-             <p> Here's {{ pokemonList[1] }}</p>`
+             <p> Liste des pokémons : </p>`
 })
 export class AppComponent implements OnInit {
-  pokemonList = ['Rondoudou', 'Noctali', 'Mew'];
+  pokemonList : Pokemon[] = POKEMONS;
 
   ngOnInit(): void {
     console.table(this.pokemonList);
-    this.selectPokemon('Raichu');
+    this.selectPokemon(this.pokemonList[10]);
   }
 
-  selectPokemon(pokemonName : string) {
-    console.log(`Vous avez cliqué sur le pokémon ${pokemonName}`); 
+  selectPokemon(pokemon : Pokemon) { // import du model
+    console.log(`Vous avez cliqué sur le pokémon ${pokemon.name}`);
     // méthode avec des backticks pour déclarer une variable dynamique (ES6). Equivalent à la concaténation en JS ('vous avez cliqué ' + pokemonName)
   }
 }
