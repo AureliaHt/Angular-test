@@ -4,13 +4,13 @@ import { Component, OnInit } from '@angular/core';
 // selector donnant un nom au composant
 @Component({ 
   selector: 'app-root',
-  template: `<h1>Welcome on your Pokedex!</h1>,
-             <p>Here's {{ pokemons[1] }}</p>`
+  template: `<h1>Welcome on your Pokedex !</h1>
+             <p> Here's {{ pokemonList[1] }}</p>`
 })
 export class AppComponent implements OnInit {
-  pokemons = ['Rondoudou', 'Noctali', 'Mew'];
+  pokemonList = ['Rondoudou', 'Noctali', 'Mew'];
 
   ngOnInit(): void {
-    console.table(this.pokemons);
+    console.table(this.pokemonList);
   }
 }
