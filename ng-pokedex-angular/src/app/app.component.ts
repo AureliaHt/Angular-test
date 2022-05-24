@@ -4,11 +4,13 @@ import { Pokemon } from './pokemon';
 
 // Composant qui doit contenir au minimum deux composants => 
 // selector donnant un nom au composant
+// template pour gérer la view du composant
 @Component({ 
   selector: 'app-root',
-  template: `<h1>Welcome on your Pokedex !</h1>
-             <p> Liste des pokémons : </p>`
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.sass']
 })
+
 export class AppComponent implements OnInit {
   pokemonList : Pokemon[] = POKEMONS;
 
