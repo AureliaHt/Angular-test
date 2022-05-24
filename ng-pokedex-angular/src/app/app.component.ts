@@ -12,5 +12,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     console.table(this.pokemonList);
+    this.selectPokemon('Raichu');
+  }
+
+  selectPokemon(pokemonName : string) {
+    console.log(`Vous avez cliqué sur le pokémon ${pokemonName}`); 
+    // méthode avec des backticks pour déclarer une variable dynamique (ES6). Equivalent à la concaténation en JS ('vous avez cliqué ' + pokemonName)
   }
 }
