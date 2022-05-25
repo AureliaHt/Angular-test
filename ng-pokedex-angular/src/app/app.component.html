@@ -8,19 +8,13 @@
     (keyup.enter)="selectPokemon(input.value)" 
     type="number"
 />
-
+<!-- *ngIf -> directive structurelle, affichera un élément du DOM selon une condition boolean // ng-container // ng-template -->
 <p *ngIf="pokemonSelected">vous avez sélectionné le pokémon : {{ pokemonSelected?.name }}</p>
 <p *ngIf="!pokemonSelected">vous avez demandé un pokémon qui n'existe pas dans la base de données</p>
 
-<p>{{pokemonList[0].name}} </p> <!-- syntaxe d'interpolation des templates {{}} pour afficher la data -->
-<p>{{pokemonList[1].name}} </p> <!-- interpolation = class du composant vers le template  -->
-<p>{{pokemonList[2].name}} </p> <!-- interpolation ne marche que sur les types primitifs  -->
-<p>{{pokemonList[3].name}} </p>
-<p>{{pokemonList[4].name}} </p>
-<p>{{pokemonList[5].name}} </p>
-<p>{{pokemonList[6].name}} </p>
-<p>{{pokemonList[7].name}} </p>
-<p>{{pokemonList[8].name}} </p>
-<p>{{pokemonList[9].name}} </p>
-<p>{{pokemonList[10].name}} </p>
-<p>{{pokemonList[11].name}} </p>
+<p *ngFor="let pokemon of pokemonList">
+  {{ pokemon.id }}. {{ pokemon.name }}, type:{{ pokemon.types }}
+</p>
+<!-- syntaxe d'interpolation des templates {{}} pour afficher la data -->
+<!-- interpolation = class du composant vers le template  -->
+<!-- interpolation ne marche que sur les types primitifs  -->
