@@ -2,12 +2,15 @@
 
 <p>Voici une liste de 12 pokémons :</p><br>
 <!-- #input = variable référencée dans le template pour un accès direct sur un élément du DOM depuis le template  -->
+<!-- .enter pour ne remonter un événement que lorsque l'utilisateur appuie sur la touche entrer  cf => pseudo-events d'Angular -->
 <input
     #input 
-    (keyup)="selectPokemon(input.value)"
+    (keyup.enter)="selectPokemon(input.value)" 
     type="number"
 />
-<p>{{ pokemonSelected?.name }}</p>
+
+<p *ngIf="pokemonSelected">vous avez sélectionné le pokémon : {{ pokemonSelected?.name }}</p>
+<p *ngIf="!pokemonSelected">vous avez demandé un pokémon qui n'existe pas dans la base de données</p>
 
 <p>{{pokemonList[0].name}} </p> <!-- syntaxe d'interpolation des templates {{}} pour afficher la data -->
 <p>{{pokemonList[1].name}} </p> <!-- interpolation = class du composant vers le template  -->
