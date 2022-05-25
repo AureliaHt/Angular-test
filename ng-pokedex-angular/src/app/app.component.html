@@ -1,6 +1,14 @@
 <h1> Bienvenue sur votre pokédex !</h1>
 
-<p>Voici une liste de 12 pokémons :</p>
+<p>Voici une liste de 12 pokémons :</p><br>
+<!-- #input = variable référencée dans le template pour un accès direct sur un élément du DOM depuis le template  -->
+<input
+    #input 
+    (keyup)="selectPokemon(input.value)"
+    type="number"
+/>
+<p>{{ pokemonSelected?.name }}</p>
+
 <p>{{pokemonList[0].name}} </p> <!-- syntaxe d'interpolation des templates {{}} pour afficher la data -->
 <p>{{pokemonList[1].name}} </p> <!-- interpolation = class du composant vers le template  -->
 <p>{{pokemonList[2].name}} </p> <!-- interpolation ne marche que sur les types primitifs  -->

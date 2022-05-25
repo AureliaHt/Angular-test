@@ -13,14 +13,23 @@ import { Pokemon } from './pokemon';
 
 export class AppComponent implements OnInit {
   pokemonList : Pokemon[] = POKEMONS;
+  pokemonSelected : Pokemon|undefined;
 
   ngOnInit(): void {
     console.table(this.pokemonList);
-    this.selectPokemon(this.pokemonList[10]);
   }
 
-  selectPokemon(pokemon : Pokemon) { // import du model
-    console.log(`Vous avez cliqué sur le pokémon ${pokemon.name}`);
+  selectPokemon(pokemonId : string) { // import du model
+    const pokemon: Pokemon|undefined = this.pokemonList.find(pokemon => pokemon.id == +pokemonId); // l'opérateur + converti en nombre
+    
+    if (pokemon){
+      console.log(`Vous avez demandé le pokémon ${pokemon.name}`);
+      this.pokemonSelected = pokemon;
+    } else {
+      console.log(`Vous avez demandé un pokémon qui n'est pas présent dans la base de données ou qui n'existe pas`);
+      this.pokemonSelected = pokemon;
+    }
+    
     // méthode avec des backticks pour déclarer une variable dynamique (ES6). Equivalent à la concaténation en JS ('vous avez cliqué ' + pokemonName)
   }
 }
