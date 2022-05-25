@@ -1,4 +1,4 @@
-<h1> Bienvenue sur votre pokédex !</h1>
+<h1 class="center"> Bienvenue sur votre pokédex !</h1>
 
 <p>Voici une liste de 12 pokémons :</p><br>
 <!-- #input = variable référencée dans le template pour un accès direct sur un élément du DOM depuis le template  -->
@@ -12,9 +12,22 @@
 <p *ngIf="pokemonSelected">vous avez sélectionné le pokémon : {{ pokemonSelected?.name }}</p>
 <p *ngIf="!pokemonSelected">vous avez demandé un pokémon qui n'existe pas dans la base de données</p>
 
-<p *ngFor="let pokemon of pokemonList">
-  {{ pokemon.id }}. {{ pokemon.name }}, type:{{ pokemon.types }}
-</p>
+  <div class="row">
+    <div *ngFor="let pokemon of pokemonList" class="col s6 m4">
+      <div class="card horizontal grey lighten-5 dark-text">
+        <div class="card-image"> <img [src]="pokemon.picture"> </div>
+        <div class="card-stacked"> 
+            <div class="card-content">
+                <p><strong>{{ pokemon.id }}. {{ pokemon.name }}</strong></p>
+                <p> HP : {{ pokemon.hp }} </p>
+                <p> CP : {{ pokemon.cp }} </p>
+                <p> TYPE : {{ pokemon.types }} </p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <!-- syntaxe d'interpolation des templates {{}} pour afficher la data -->
 <!-- interpolation = class du composant vers le template  -->
 <!-- interpolation ne marche que sur les types primitifs  -->
