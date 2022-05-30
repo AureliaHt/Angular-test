@@ -1,6 +1,6 @@
 <h1 class="center"> Bienvenue sur votre pokédex !</h1>
 
-<p>Voici une liste de 12 pokémons :</p><br>
+<p>Voici une liste de 12 pokémons :</p>
 <!-- #input = variable référencée dans le template pour un accès direct sur un élément du DOM depuis le template  -->
 <!-- .enter pour ne remonter un événement que lorsque l'utilisateur appuie sur la touche entrer  cf => pseudo-events d'Angular -->
 <input
@@ -21,7 +21,9 @@
                 <p><strong>{{ pokemon.id }}. {{ pokemon.name }}</strong></p>
                 <p> HP : {{ pokemon.hp }} </p>
                 <p> CP : {{ pokemon.cp }} </p>
-                <p> TYPE : {{ pokemon.types }} </p>
+                <span *ngFor="let type of pokemon.types" class="{{ type | pokemonTypeColor}}">
+                    {{ type }}
+                </span>
             </div>
         </div>
       </div>
