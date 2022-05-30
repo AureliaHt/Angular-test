@@ -14,7 +14,7 @@
 
   <div class="row">
     <div *ngFor="let pokemon of pokemonList" class="col s6 m4">
-      <div class="card horizontal grey lighten-5 dark-text">
+      <div class="card horizontal grey lighten-5 dark-text" (click)="selectPokemon" pokemonBorderCard>
         <div class="card-image"> <img [src]="pokemon.picture"> </div>
         <div class="card-stacked"> 
             <div class="card-content">
