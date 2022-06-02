@@ -1,34 +1,13 @@
 <h1 class="center"> Bienvenue sur votre pokédex !</h1>
 
-<p>Voici une liste de 12 pokémons :</p>
+<!-- A chaque mouvement de l'url, Angular va récupérer le composant associé et en injecter le template à la place du template actuellement affiché -->
+<!-- Seul le contenu présent entre les balises sera amené à changer, le h1 restera toujours  -->
+<router-outlet></router-outlet>
+
 <!-- #input = variable référencée dans le template pour un accès direct sur un élément du DOM depuis le template  -->
 <!-- .enter pour ne remonter un événement que lorsque l'utilisateur appuie sur la touche entrer  cf => pseudo-events d'Angular -->
-<input
-    #input 
-    (keyup.enter)="selectPokemon(input.value)" 
-    type="number"
-/>
-<!-- *ngIf -> directive structurelle, affichera un élément du DOM selon une condition boolean // ng-container // ng-template -->
-<p *ngIf="pokemonSelected">vous avez sélectionné le pokémon : {{ pokemonSelected?.name }}</p>
-<p *ngIf="!pokemonSelected">vous avez demandé un pokémon qui n'existe pas dans la base de données</p>
 
-  <div class="row">
-    <div *ngFor="let pokemon of pokemonList" class="col s6 m4">
-      <div class="card horizontal grey lighten-5 dark-text" (click)="selectPokemon" pokemonBorderCard>
-        <div class="card-image"> <img [src]="pokemon.picture"> </div>
-        <div class="card-stacked"> 
-            <div class="card-content">
-                <p><strong>{{ pokemon.id }}. {{ pokemon.name }}</strong></p>
-                <p> HP : {{ pokemon.hp }} </p>
-                <p> CP : {{ pokemon.cp }} </p>
-                <span *ngFor="let type of pokemon.types" class="{{ type | pokemonTypeColor}}">
-                    {{ type }}
-                </span>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- *ngIf -> directive structurelle, affichera un élément du DOM selon une condition boolean // ng-container // ng-template -->
 
 <!-- syntaxe d'interpolation des templates {{}} pour afficher la data -->
 <!-- interpolation = class du composant vers le template  -->

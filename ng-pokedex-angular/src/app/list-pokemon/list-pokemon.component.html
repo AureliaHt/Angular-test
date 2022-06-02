@@ -1,1 +1,27 @@
-<p>list-pokemon works!</p>
+<div class="container">
+  <div class="row">
+    <div *ngFor="let pokemon of pokemonList" class="col s6 m4">
+      <div
+        class="card horizontal grey lighten-5 dark-text"
+        pokemonBorderCard
+      >
+        <div class="card-image"><img [src]="pokemon.picture" /></div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <p>
+              <strong>{{ pokemon.id }}. {{ pokemon.name }}</strong>
+            </p>
+            <p>HP : {{ pokemon.hp }}</p>
+            <p>CP : {{ pokemon.cp }}</p>
+            <span
+              *ngFor="let type of pokemon.types"
+              class="{{ type | pokemonTypeColor }}"
+            >
+              {{ type }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
