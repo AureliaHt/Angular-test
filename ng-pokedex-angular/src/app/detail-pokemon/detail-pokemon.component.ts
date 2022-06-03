@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { POKEMONS } from '../mock-pokemon-list';
 import { Pokemon } from '../pokemon';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 // activatedRoute -> procure un accès à une donnée via un chemin lié à un composant déjà chargé dans un template
 // ActivatedRoute Snapshot pour traverser l'arborescence des routes  et recueillir la donnée à l'instant T
 // ParamMap -> carte donnant les paramètres d'une route
@@ -16,7 +16,7 @@ export class DetailPokemonComponent implements OnInit {
 
   // injection de service via les paramètres de son constructeur
   // pour piloter les routes par id => injection du service
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     // import de nos data pokémons
@@ -27,5 +27,8 @@ export class DetailPokemonComponent implements OnInit {
     if (pokemonId) {
       this.pokemon = this.pokemonList.find( pokemon => pokemon.id === +pokemonId );
     }
+  }
+  goBackToPokemonList() {
+      this.router.navigate(['/pokemons'], { relativeTo: this.route});
   }
 }
