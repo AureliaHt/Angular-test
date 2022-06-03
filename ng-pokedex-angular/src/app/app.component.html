@@ -1,14 +1,22 @@
-<h1 class="center"> Bienvenue sur votre pokédex !</h1>
+<nav>
+    <div class="nav-wrapper light-green lighten-1">
+            <a href="#" class="brand-logo center">Pokédex</a>
+    </div>
+</nav>
+
 
 <!-- A chaque mouvement de l'url, Angular va récupérer le composant associé et en injecter le template à la place du template actuellement affiché -->
 <!-- Seul le contenu présent entre les balises sera amené à changer, le h1 restera toujours  -->
 <router-outlet></router-outlet>
 
+
+
+
+
+
 <!-- #input = variable référencée dans le template pour un accès direct sur un élément du DOM depuis le template  -->
 <!-- .enter pour ne remonter un événement que lorsque l'utilisateur appuie sur la touche entrer  cf => pseudo-events d'Angular -->
-
 <!-- *ngIf -> directive structurelle, affichera un élément du DOM selon une condition boolean // ng-container // ng-template -->
-
 <!-- syntaxe d'interpolation des templates {{}} pour afficher la data -->
 <!-- interpolation = class du composant vers le template  -->
 <!-- interpolation ne marche que sur les types primitifs  -->
