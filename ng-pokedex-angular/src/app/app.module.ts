@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +16,7 @@ import { PokemonModule } from './pokemon/pokemon.module';
   // attention à l'ordre de déclarations des moddules, bien prendre en compte l'ordre de lecture des routes
   imports: [
     BrowserModule,
+    FormsModule,
     PokemonModule,
     AppRoutingModule
   ],
