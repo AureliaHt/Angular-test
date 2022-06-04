@@ -9,7 +9,7 @@
                     <input type="text" class="form-control" id="name" required pattern="^[a-zA-Z0-9àéèç]{1,25}$"
                         [(ngModel)]="pokemon.name" name="name" #name="ngModel">
 
-                    <div [hidden]="name.valid || name.pristine" class="card-panel red accent-1"> <!-- pristine pour signaler qque le formulairre n'a pas été changé par l'utilisateur -->
+                    <div [hidden]="name.valid || name.pristine" class="card-panel red accent-1"> <!-- pristine pour signaler que le formulairre n'a pas été changé par l'utilisateur -->
                         Le nom du pokémon est requis (1-25).
                     </div>
                 </div>
