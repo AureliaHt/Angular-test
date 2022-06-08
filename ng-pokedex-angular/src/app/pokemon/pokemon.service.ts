@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { Pokemon } from './pokemon';
 
 // Décorateur servant à signaler que notre service peut avoir d'autres dépendances
@@ -22,24 +22,28 @@ export class PokemonService {
   // Observable of = interface pour gérer des opérations asynchrones. En cas d'erreur, l'app renverra un tableau vide.
   getPokemonList(): Observable<Pokemon[]> {
     return this.http.get<Pokemon[]>('api/pokemons').pipe(
-      tap((pokemonList) => console.table(pokemonList)),
-      catchError((error) => {
-        console.log(error);
-        return of([]);
-      })
-    )
+      tap((response) => this.log(response)),
+      catchError((error) => this.handleError(error, []))
+    );
   }
 
   // requête GET pour récupérer un pokémon selon son id
   // en cas d'erreur retourne undefined
   getPokemonById(pokemonId: number): Observable<Pokemon|undefined> {
     return this.http.get<Pokemon>(`api/pokemons/${pokemonId}`).pipe(
-      tap((pokemon) => console.table(pokemon)),
-      catchError((error) => {
-        console.log(error);
-        return of(undefined);
-      })
-    )
+      tap((response) => this.log(response)),
+      catchError((error) => this.handleError(error, undefined))
+    );
+  }
+
+  // méthode privée non accessible à l'extérieur du service
+  private log(response: Pokemon[] | Pokemon | undefined) {
+    console.table(response);
+  }
+
+  private handleError(error: Error, errorValue: any) {
+    console.error(error);
+    return of(errorValue);
   }
 
   // service pour avoir une liste dess types de pokémons
