@@ -16,8 +16,11 @@ export class ListPokemonComponent implements OnInit {
     private pokemonService: PokemonService
   ) { }
 
+  // Méthode .subscribe pour suivre un Observable, en l'occurrence getPokemonList, abonnement qui permet de recevoir la liste de pokémons
+  // le subscribe me permet d'attribuer le flux de données dans ma propriété
   ngOnInit() {
-    this.pokemonList = this.pokemonService.getPokemonList();
+    this.pokemonService.getPokemonList()
+        .subscribe(pokemonList => this.pokemonList = pokemonList);
   }
 
   goToPokemonDetails(pokemon: Pokemon) {

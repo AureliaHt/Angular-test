@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { Pokemon } from './pokemon';
@@ -36,8 +36,21 @@ export class PokemonService {
     );
   }
 
+  // Implémentation d'une méthode pour permettre aux données de persister vers le serveur
+  // Requête de type PUT pour update, faire une demande de modification des données
+  // Header Content-Type, pour préciser au HttpClient qu'on envoie des données dans notre requête
+  updatePokemon(pokemon: Pokemon): Observable<null> { // Normalement, remplacer la valeur null par Pokemon | undefined 
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.put('api/pokemons', pokemon, httpOptions).pipe(   // .put(url, corps de la requête (informations du pokémon), header(pour préciser qu'il y a des données de transmises))
+      tap((response) => this.log(response)),
+      catchError((error) => this.handleError(error, null)) // Remplacer null par undefined normalement
+    );
+  }
+
   // méthode privée non accessible à l'extérieur du service
-  private log(response: Pokemon[] | Pokemon | undefined) {
+  private log(response: any) {
     console.table(response);
   }
 
