@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { POKEMONS } from './mock-pokemon-list';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { Pokemon } from './pokemon';
 
 // Décorateur servant à signaler que notre service peut avoir d'autres dépendances
@@ -8,14 +9,37 @@ import { Pokemon } from './pokemon';
 @Injectable()
 export class PokemonService {
 
-  // service prodigant la liste de pokémons
-  getPokemonList(): Pokemon[] {
-    return POKEMONS;
+  // injection du HttpClient dans le service afin de simuler des requêtes à un serveur distant
+  constructor (private http: HttpClient) {
+
   }
 
-  // service pour sélectionner un pokémon par son id
-  getPokemonById(pokemonId: number): Pokemon|undefined {
-    return POKEMONS.find(pokemon => pokemon.id === pokemonId);
+  // réception de data contenant un tableau de pokémons de manière asynchrone
+  // On retourne un flux : Observable qui contient les données qui arriveront plus tard
+  // Requête GET pour récupérer des données
+  // Méthode pipe pour utiliser plusieurs opérateurs ensemble
+  // Opérateur tap retourne un observable identique à la source. Ne modifie pas le flux.
+  // Observable of = interface pour gérer des opérations asynchrones. En cas d'erreur, l'app renverra un tableau vide.
+  getPokemonList(): Observable<Pokemon[]> {
+    return this.http.get<Pokemon[]>('api/pokemons').pipe(
+      tap((pokemonList) => console.table(pokemonList)),
+      catchError((error) => {
+        console.log(error);
+        return of([]);
+      })
+    )
+  }
+
+  // requête GET pour récupérer un pokémon selon son id
+  // en cas d'erreur retourne undefined
+  getPokemonById(pokemonId: number): Observable<Pokemon|undefined> {
+    return this.http.get<Pokemon>(`api/pokemons/${pokemonId}`).pipe(
+      tap((pokemon) => console.table(pokemon)),
+      catchError((error) => {
+        console.log(error);
+        return of(undefined);
+      })
+    )
   }
 
   // service pour avoir une liste dess types de pokémons

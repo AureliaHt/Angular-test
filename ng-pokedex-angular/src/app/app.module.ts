@@ -18,7 +18,7 @@ import { InMemoryDataService } from './in-memory-data.service';
 
   // attention à l'ordre de déclarations des modules, bien prendre en compte l'ordre de lecture des routes
   // méthode .forRoot() pour retourner un module et ses dépendances
-  // option dataEncapsulation, par défaut à false pour insérer les données directement dans le body. True : encapsule le contenu  dans une data property
+  // option dataEncapsulation, par défaut à false pour insérer les données directement dans le body. True : encapsule le contenu dans une data property
   imports: [
     BrowserModule,
     FormsModule,
