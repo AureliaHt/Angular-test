@@ -14,6 +14,23 @@
                     </div>
                 </div>
 
+                <!-- Pokemon picture -->
+                <div *ngIf="isAddForm" class="form-group"> <!-- directive structurelle *ngIf pour n'afficher l'ajout de photo que dans le formulaire d'ajout d'un pokémon-->
+                    <label for="picture">Image</label>
+                    <input 
+                        type="url" 
+                        class="form-control" 
+                        id="picture" 
+                        required 
+                        [(ngModel)]="pokemon.picture" name="picture"
+                        #picture="ngModel">
+                
+                    <div [hidden]="picture.valid || picture.pristine" class="card-panel red accent-1">
+                        <!-- pristine pour signaler que le formulaire n'a pas été changé par l'utilisateur -->
+                        Veuillez indiquer le numéro du pokémon (xxx) pour insérer une image.
+                    </div>
+                </div>
+
                 <!-- Pokemon hp -->
                 <div class="form-group">
                     <label for="hp">Point de vie</label>

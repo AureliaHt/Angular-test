@@ -50,7 +50,7 @@ export class PokemonFormComponent implements OnInit {
     // instruction à éxécuter pour savoir quel formulaire afficher (ajout ou édition)
     if (this.isAddForm) {
       this.pokemonService.addPokemon(this.pokemon)
-        .subscribe(() => this.router.navigate(['/pokemon', this.pokemon.id])); // coté backend création d'un id unique pour le nouvel ajout
+        .subscribe((pokemon: Pokemon) => this.router.navigate(['/pokemon', this.pokemon.id])); // coté backend création d'un id unique pour le nouvel ajout
     } else {
       this.pokemonService.updatePokemon(this.pokemon)
         .subscribe(() => this.router.navigate(['/pokemon', this.pokemon.id]));
