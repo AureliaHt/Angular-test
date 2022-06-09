@@ -49,6 +49,15 @@ export class PokemonService {
     );
   }
 
+  // implémentation d'une méthode pour supprimer des pokémons
+  // méthode http delete pour supprimer la ressource indiquée
+  deletePokemonById(pokemonId: number): Observable<null> {
+    return this.http.delete(`api/pokemons/${pokemonId}`).pipe(
+      tap((response) => this.log(response)),
+      catchError((error) => this.handleError(error, undefined))
+    );
+  }
+
   // méthode privée non accessible à l'extérieur du service
   private log(response: any) {
     console.table(response);

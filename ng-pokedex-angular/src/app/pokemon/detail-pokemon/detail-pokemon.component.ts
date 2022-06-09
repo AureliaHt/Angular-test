@@ -31,10 +31,19 @@ export class DetailPokemonComponent implements OnInit {
           .subscribe(pokemon => this.pokemon = pokemon);
     }
   }
+
   goBackToPokemonList() {
       this.router.navigate(['/pokemons'], { relativeTo: this.route});
   }
+
   goToPokemonEdit(pokemon: Pokemon) {
     this.router.navigate(['/edit/pokemon', pokemon.id]);
+  }
+
+  // méthode pour supprimer le pokemon au mouse event click
+  // .subscribe pour que l'utilisateur soit automatiquement redirigé vers la liste de pokémons après suppression
+  deletePokemon(pokemon: Pokemon) {
+    this.pokemonService.deletePokemonById(pokemon.id)
+      .subscribe(() => this.goBackToPokemonList());
   }
 }
