@@ -11,6 +11,7 @@ import { PokemonService } from '../pokemon.service';
 export class PokemonFormComponent implements OnInit {
   @Input() pokemon: Pokemon;
   types: string[];
+  isAddForm: boolean; // if true -> ajout de pokémon, if false -> édition d'un pokémon
 
   constructor(
     private router: Router,
@@ -18,6 +19,7 @@ export class PokemonFormComponent implements OnInit {
 
   ngOnInit() {
     this.types = this.pokemonService.getPokemonTypeList();
+    this.isAddForm = this.router.url.includes('add'); // Booleen pour faire la différence (grâce aux url) entre les deux formulaires (edition, ajout) et savoir lequel ajouter
   }
 
   hasType(type: string): boolean {
@@ -45,7 +47,13 @@ export class PokemonFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.pokemonService.updatePokemon(this.pokemon)
+    // instruction à éxécuter pour savoir quel formulaire afficher (ajout ou édition)
+    if (this.isAddForm) {
+      this.pokemonService.addPokemon(this.pokemon)
+        .subscribe(() => this.router.navigate(['/pokemon', this.pokemon.id])); // coté backend création d'un id unique pour le nouvel ajout
+    } else {
+      this.pokemonService.updatePokemon(this.pokemon)
         .subscribe(() => this.router.navigate(['/pokemon', this.pokemon.id]));
+    }
   }
 }
