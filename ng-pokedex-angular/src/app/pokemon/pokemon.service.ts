@@ -36,6 +36,18 @@ export class PokemonService {
     );
   }
 
+  // Implémentation d'une méthode pour ajouter de nouveaux pokémons
+  // Requête de type POST avec Header Content-Type pour préciser l'envoi de données dans le corps de notre requête
+  addPokemon<pokemon>(pokemon: Pokemon): Observable<null> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.post('api/pokemons', pokemon, httpOptions).pipe(
+      tap((response) => this.log(response)),
+      catchError((error) => this.handleError(error, null))
+    );
+  }
+
   // Implémentation d'une méthode pour permettre aux données de persister vers le serveur
   // Requête de type PUT pour update, faire une demande de modification des données
   // Header Content-Type, pour préciser au HttpClient qu'on envoie des données dans notre requête
