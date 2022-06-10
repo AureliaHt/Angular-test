@@ -27,7 +27,7 @@ export class PokemonService {
     );
   }
 
-  // requête GET pour récupérer un pokémon selon son id
+  // requête GET pour récupérer les informations d'un pokémon selon son id
   // en cas d'erreur retourne undefined
   getPokemonById(pokemonId: number): Observable<Pokemon|undefined> {
     return this.http.get<Pokemon>(`api/pokemons/${pokemonId}`).pipe(
@@ -67,6 +67,15 @@ export class PokemonService {
     return this.http.delete(`api/pokemons/${pokemonId}`).pipe(
       tap((response) => this.log(response)),
       catchError((error) => this.handleError(error, undefined))
+    );
+  }
+
+  // implémentation d'une méthode pour rechercher un pokémon par son nom
+  // url => requête sur une propriété du pokémon (le nom) à laquelle on passe le terme de recherche défini par l'utilisateur
+  searchInPokemonList(term: string): Observable<Pokemon[]> {
+    return this.http.get<Pokemon[]>(`api/pokemons/?name=${term}`).pipe(
+      tap((response) => this.log(response)),
+      catchError((error) => this.handleError(error, []))
     );
   }
 
