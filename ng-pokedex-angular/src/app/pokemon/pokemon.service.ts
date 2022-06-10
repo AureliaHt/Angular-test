@@ -71,8 +71,13 @@ export class PokemonService {
   }
 
   // implémentation d'une méthode pour rechercher un pokémon par son nom
+  // condition : recherche si deux lettres minimum sont indiquées. Retourne un tableau vide si moins de 2 lettres sont entrées
   // url => requête sur une propriété du pokémon (le nom) à laquelle on passe le terme de recherche défini par l'utilisateur
   searchInPokemonList(term: string): Observable<Pokemon[]> {
+    if(term.length <= 1) {
+      return of([]);
+    }
+    
     return this.http.get<Pokemon[]>(`api/pokemons/?name=${term}`).pipe(
       tap((response) => this.log(response)),
       catchError((error) => this.handleError(error, []))
