@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from 'rxjs';
 import { Pokemon } from '../pokemon';
+import { PokemonService } from '../pokemon.service';
 
 @Component({
   selector: 'app-search-pokemon',
@@ -14,9 +15,19 @@ export class SearchPokemonComponent implements OnInit {
   // flux de pokémons qui devra correspondre aux termes recherchés par l'utilisateur
   pokemons$: Observable<Pokemon[]>;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private pokemonService: PokemonService) { }
 
   ngOnInit() {
+    // méthode pour déclarer que les termes de la recherche doivent correspondre au flux de pokémons
+    // opérateur debounceTime pour attendre un temps donné avant de renvoyer des données
+    // opérateur distinctUntilChanged pour vérifier s'il y a un changement dans les termes avant renvoyer des données
+    // opérateur map pour créer un nouvel Observable, à partir de l'Observable d'origine, en transformant chacune des valeurs
+    // opérateur switchMap va unsubscribe / subscribe à un flux à chaque changement de valeur
+    this.pokemons$ = this.searchTerms.pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap((term) => this.pokemonService.searchInPokemonList(term))
+    );
   }
 
   // implémentation d'une méthode pour renvoyer les termes recherchés par l'utilisateur
